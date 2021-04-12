@@ -56,7 +56,7 @@ def update_sg(security_group_id: str,
 
     for ip_perm in security_group["IpPermissions"]:
         if ip_perm.get("FromPort") == port and ip_perm.get("ToPort") == port and ip_perm.get("IpProtocol") == "tcp":
-            del_ip_ranges = [ip_range for ip_range in ip_perm["IpRanges"] if ip_range["Description"] == desc]
+            del_ip_ranges = [ip_range for ip_range in ip_perm["IpRanges"] if ip_range.get("Description") == desc]
             del_ip_perm = copy.deepcopy(ip_perm)
             if len(del_ip_ranges) > 0:
                 del_ip_perm["IpRanges"] = del_ip_ranges
